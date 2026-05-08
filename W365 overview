@@ -1,0 +1,360 @@
+Windows 365 (W365) Overview
+
+Windows 365 is a cloud-based Software as a Service (SaaS) that automatically creates a new type of Windows virtual machine, known as Cloud PCs, for end users.
+
+Accessibility: Allows users to access Windows 10 or 11 from various devices (Windows, macOS, iOS, and Android).
+
+Scalability: Offers various solutions to support organizations of all sizes with multiple deployment options tailored to specific roles and needs.
+
+Windows 365 Editions
+
+Edition	Target Audience & Scale	Key Features
+
+W365 Business	: Windows 365 Business simplifies deployment and is made specifically for use in smaller companies (up to 300 seats) who want ready-to-use Cloud PCs with simple management options.
+
+
+W365 Enterprise	: Windows 365 Enterprise is for larger companies who want unlimited seats for creating Cloud PCs. It includes options to create custom Cloud PCs based on device images that you create, more management options, and full integration with Microsoft Intune. 
+
+
+W365 Government	: Windows 365 Government is a service that spans across a regulated US Government Community Cloud (GCC) and a public facing cloud.
+
+
+WWindows 365 Flex helps organizations save costs by providing a single license to provision up to three Cloud PCs for non-concurrent use. These are meant for cases where the user needs Cloud PC access for a limited time per day. 
+
+
+W365 for Agents	AI-powered cWindows 365 for Agents (preview) is the compute platform for AI-powered computer-using agents.These Cloud PCs are sandbox environments spun up for user prompted tasks.
+
+Comparison: AVD vs. Windows 365
+
+Feature	Azure Virtual Desktop (AVD)	     Windows 365 (W365)
+Cost	      Pay-as-you-go (usage-based).	      Fixed monthly cost per user.
+Management	Azure Portal and Intune.	     Intune (cannot be managed via Azure Portal).
+Managed By	Customer (except AVD services).	  Microsoft (except Azure Network when using ANC).
+
+
+The Cloud PC Concept
+
+Definition: A highly available, optimized, and scalable VM providing a rich Windows desktop experience.
+
+Personalization: Users have a 1:1 relationship with their Cloud PC; it acts as their personal computer in the cloud.
+
+Automation: Created automatically when a user in an appropriate Microsoft Entra group is assigned a license.
+
+Continuity: Maintains a consistent device state; users can resume work exactly where they left off without loss of data or settings.
+Technical Skills	Requires detailed VDI config knowledge.	Little to no VDI experience required.
+User Self-Service	Not supported.	Restart, Troubleshoot, Restore via Web/App.
+
+Key Benefits
+
+For Users
+
+Platform Flexibility: Access from Windows, laptops, iPads, Macs, and Android.
+
+High-Speed Internet: Powered by rapid cloud speeds for faster online service access.
+
+Self-Service Actions: Users can restart, rename, and troubleshoot on their own.
+
+Consistent device state : It is a feature that maintains a consistent device state(regardless of the number of days since last access0 ensures that users can seemlessly resume their work without any loss of data or settings .
+
+For Admins
+
+No VPN Needed: Hybrid devices are always connected to the on-premises network.
+
+Easy Provisioning: Setup new devices in just two steps.
+
+Regional Policies: Use policies based on the closest region.
+
+Consistent management : manage cloud pc with microsoft endpoint manager 
+
+Performance Monitoring : Monitor performance using endpoint analytics 
+
+Scalable resource : Resize cloud PC based on available license 
+
+Enhanced security : Use MFA and conditional access
+
+RBAC : The built in RBAc roles reduces security risks .
+
+Immediate Security: dedicated security baselines ensures protection for cloud pcs.
+
+W365 Enterprise Requirements
+
+Licenses: Intune Admin(to manage the devices ) requires  Windows E3, Microsoft Entra ID P1, and W365 license(to use cloud pc)
+
+Azure Subscription: Active subscription (not needed for Microsoft-hosted networks).
+
+Network: Either Microsoft Hosted Network (MHN) or Azure Network Connection (ANC) for hybrid needs.
+
+User Identity: Synced or Cloud-only (use MHN).synced equals to hybrid .
+
+Image : Gallery or custom (gen2) generalized/single.
+
+Monitoring: Use Endpoint Analytics to track performance and service health.
+
+W365 enterprise uses :
+
+Microsoft Intune to manage the Cloud PCs.
+Microsoft Entra ID for identity and access control.
+Azure Virtual Desktop for remote connectivity.
+
+Note :
+
+Each Cloud PC is assigned to an individual user and is their dedicated Windows device.
+
+When a Windows 365 license is assigned to a user:
+
+Provisioning of a new Cloud PC automatically starts.
+
+The Cloud PC is enrolled into MS Intune.
+
+What is Provisioning ?
+
+Provisioning is the automatic creation of Cloud PCs for your end users.
+
+After setting up Cloud PC support in MS Intune, a Cloud PC is automatically provisioned whenever a user is assigned a Cloud PC license to an appropriate MS Entra user group.
+
+To set up Cloud PC support we can use Microsoft Hosted Network (MHN) or create Azure Network Connections (ANC).
+
+  ANC is/are links between Cloud PCs and your on-premise resources.
+
+We can choose a built-in Windows image (Gallery Image) or create our own image (Golden Image) to use for each Cloud PC.
+
+You can run one Cloud PC with one license. Only one user can access Cloud PC, but it gives admin 10 minutes windows to take a session.
+
+Billing
+
+Cloud PCs are billed in a per-user per-month cost model.
+
+Note : Cloud PCs are either:
+
+Joined to your enterprise Active Directory domain and synced to Microsoft Entra ID.
+
+Directly joined to Microsoft Entra ID.
+
+W365 Business
+
+W365 Business is a version of W365 made specifically for use in smaller companies (up to 300 seats). It offers an easy, streamlined way of provisioning Cloud PCs to your users.
+
+W365 Business Downsides
+
+It is limited up to 300 seats.
+
+Business Cloud PCs cannot be managed through MS Intune.
+
+You cannot configure Cloud PC for hybrid scenario (Hybrid Join).
+
+No support for custom image.
+
+Provisioning policies can take up to 2 hours for creating Cloud PCs.
+
+A user will get 7 days of grace period to reassign user the license.
+
+In case license is not reassigned the Cloud PC will automatically be deleted.
+
+In grace period user can access Cloud PC without any problem.
+
+Provisioning Policy path:
+
+Home > Devices > Provision Cloud PC > Create Policy
+
+ANC (Azure Network Connection)
+
+Azure Network Connections (ANC) let you provision Cloud PCs that are attached to a virtual network that you manage.
+
+You can have up to 50 ANCs per tenant.
+
+Path to create ANC:
+
+Devices > Cloud PC overview > Provision Cloud PCs > ANC > Manage W365 Cloud PCs
+
+As part of connection process, the Windows 365 service is granted the following permissions:
+
+Reader permission on Azure subscription.
+
+W365 Network Interface Contributor role on specified resource group.
+
+W365 Network User role on Vnet.
+
+Requirements
+
+Have the Intune Administrator or W365 Administrator role.
+
+Have an AD user account with sufficient permissions to join the AD domain into the organizational unit.
+
+To create the first ANC, you must have the subscription owner or user administrator role in the subscription where the Azure Vnet resides.
+
+For any subsequent ANCs, only the subscription reader role is required.
+
+For Disaster Recovery (DR) purposes, make sure that there are at least 50% of the IP addresses available in your subnet.
+
+Make sure that your PowerShell execution policy is configured to allow RemoteSigned scripts.
+
+  If you use Group Policy, make sure that the Group Policy Object (GPO) targeted to Organizational Unit (OU) defined in the ANC is configured to allow RemoteSigned scripts.
+
+Windows 365 Frontline
+
+Windows 365 Frontline is a version of Windows 365 that helps organizations save costs by letting them provision a Cloud PC that can be used by multiple users with a single license.
+
+Windows 365 Frontline has two different modes: Dedicated mode and Shared mode.
+
+Windows 365 in Dedicated mode
+
+A single license: lets you provision up to three Cloud PCs that can be used non-concurrently, each assigned to a single user.
+
+Provides one concurrent session.
+
+Use cases:
+
+Windows 365 Frontline dedicated mode is designed specifically for Windows workers who need a dedicated Cloud PC but don't need 24/7 access.
+
+Frontline Cloud PCs in dedicated mode can be helpful for users who are:
+
+On a rotation schedule.
+
+Working across time zones and regions.
+
+Part-time workers.
+
+Contingent staff.
+
+The maximum number of active Windows 365 Frontline Cloud PC sessions in your organization is equal to the number of Windows 365 Frontline licenses that you purchased.
+
+For example, if you purchase 10 licenses, up to 30 Cloud PCs can be provisioned in dedicated mode, but only 10 of those Cloud PCs can be active at a given time.
+
+The active sessions are managed automatically. When a user signs off from their Cloud PC, the session is released for another user to start using their Cloud PC.
+
+Includes a concurrency buffer, to let a tenant temporarily exceed the maximum concurrency limit for Windows 365 Frontline Cloud PCs.
+
+The concurrency buffer can be used up to four times per day with a maximum of one hour on each instance.
+
+This hour starts from the moment the tenant exceeded the max concurrency limit.
+
+Temporary blocks
+
+Excessive use of the concurrency buffer temporarily blocks its further use for the next 48 hours. It is imposed when four or more occasions within a 24-hour period the concurrency buffer is used for more than one hour.
+
+Permanent blocks
+
+If the tenant is temporarily blocked more than two times in a seven-day period, the tenant is permanently blocked from using the concurrency buffer.
+
+While temporarily or permanently blocked, you can still use your Frontline Cloud PCs up to the maximum concurrency limit.
+
+Maximum concurrency limit is 1.
+
+Notes:
+
+W365 Frontline Cloud PCs in dedicated mode automatically powers off after the user signs off from the Cloud PC and is powered on when the user attempts to connect.
+
+W365 Frontline in Shared mode
+
+A single license:
+
+Lets you provision one Cloud PC that can be shared non-concurrently among a group of users.
+
+Provides one concurrent session.
+
+Windows 365 Frontline in shared mode is designed specifically for workers who:
+
+Require access to a Cloud PC to perform specialized tasks for a short time during their workday.
+
+Don't require data persistence.
+
+Use cases:
+
+Customer-facing workers.
+
+External contractors.
+
+The maximum number of active W365 Frontline shared Cloud PC sessions in your organization is equal to the number of W365 Frontline shared licenses that you setup for a specific group.
+
+If you assign 10 Windows 365 licenses shared, 10 Cloud PCs can be provisioned for the group.
+
+Only a single user can connect to a shared Cloud PC at a given time.
+
+When a user signs out from the Cloud PC, all user data is deleted and the Cloud PC is released for another user to start using.
+
+Concurrency buffer doesn't exist for a Frontline Cloud PC on Shared mode.
+
+With Frontline Cloud PCs in shared mode, you can also provide Cloud Apps to users instead of the full Cloud PC desktop experience.
+
+Note:
+
+When a tenant has both dedicated mode and shared mode provisioning policies and additional licenses are added, dedicated mode Cloud PCs are provisioned first.
+
+Features not supported: Windows 365 Frontline
+
+The following features aren't yet supported for W365 Frontline:
+
+Resize a Cloud PC remote action.
+
+Cross region disaster recovery.
+
+It is only available for Azure Global Cloud.
+
+Note: You can confirm your license quantities under Billing -> Your Products.
+
+Licensing Requirements Frontline
+
+To use W365 Frontline, each user must be licensed for:
+
+Windows 11 Enterprise or Windows 10 Enterprise
+
+Microsoft Intune
+
+Microsoft Entra ID P1
+
+In addition to being available independently, Windows Enterprise, Intune, and MS Entra ID licenses are included in:
+
+MS 365 E3,MS 365 E5 ,MS 365 F3 ,MS 365 A3, A5 ,MS 365 Business Premium ,MS 365 Education Student
+
+User Experience Sync
+
+User Experience Sync is a feature for W365 Frontline Cloud PCs in shared mode and W365 Cloud apps.
+
+This cloud-native solution delivers a seamless and consistent experience for users across Cloud PC and Cloud app sessions.
+
+User Experience Sync creates and attaches individual user storage to shared Cloud PCs.
+
+When a user signs in, their individual storage is attached, providing access to their settings, files, and app data.
+
+While creating provisioning policy by selecting "Enable user experience sync" in the configuration section.
+
+Windows 365 Cloud Apps
+
+Windows 365 Cloud apps allow administrators to give users secure access to individual apps hosted on a Cloud PC, without requiring a dedicated Cloud PC for every user.
+
+Windows 365 Cloud apps run on W365 Frontline Cloud PCs in shared mode; W365 Frontline licenses are required to use Cloud apps.
+
+Prerequisites:
+
+To create Cloud apps you need W365 Frontline license.
+
+To create Cloud apps from custom apps that are not available on Gallery image you can use a custom image.
+
+You don't need to create a Provisioning Policy to create a cloud PC using W365 Business. To provision cloud PC you can simply assign the W365 Business license to the user.
+
+You don't need an Azure subscription because everything works with Azure AD natively.
+
+Provisioning Policy can take up to 24 hours for creating cloud PCs.
+
+Provisioning States
+
+Failed: CPCs that failed to provision.
+
+In grace Period
+
+Provisioned
+
+Provisioned with warning
+
+Provisioning
+
+Not provisioning
+
+
+
+
+
+
+
+
+
