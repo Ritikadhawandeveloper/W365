@@ -1,0 +1,93 @@
+Resizing
+
+Resize is a key product functionality that provides admins with any time flexibility to upgrade a user's cloud PC specs:
+
+vCPU
+
+RAM
+
+Disk size
+
+Resize operations don't require reprovisioning of the cloud PC.
+
+Note: Resizing doesn't let you downsize disk space.
+
+What is not supported?
+
+Resizing doesn't support GPU cloud PCs.
+
+GPU cloud PCs might show up in the resize flow but trying to resize a GPU cloud PC results in an error.
+
+Limitations
+
+Resizing disconnects user sessions, risking unsaved work and requiring advance user notification to prevent data loss.
+
+Note: Resizing can take from 15 to 20 minutes before the user can access their cloud PC again.
+
+Restore
+
+Point-in-time restore lets an administrator restore a cloud PC to the exact state it was at an earlier point in time.
+
+Restore points are automatically created at regular intervals based on how you have configured it.
+
+It can be configured in a new or existing user setting. All users in groups assigned to the user setting have permission to use the point-in-time restore feature.
+
+Restore point options:
+
+Short term restore points
+
+Long term restore points
+
+On-demand manual restore points
+
+Short term Restore points
+
+You can choose to set short-term restore points every 4, 6, 12, 16, or 24 hours.
+
+Each cloud PC in the assigned group has 10 short-term restore points saved at the intervals that you define in the user setting.
+
+For example: If you choose four hour intervals, each assigned cloud PC has 10 restore points spread out every four hours over the last 40 hours.
+
+Long-Term Restore Points
+
+There are also four long-term restore points that aren't configurable. These long-term restore points are saved every seven days.
+
+On-demand manual restore point
+
+Manual Restore points let administrators create a restore point whenever they want, for both a single cloud PC and groups of cloud PCs.
+
+Use case:
+
+For creating a backup before taking management actions.
+
+During employee off-boarding with sharing a restore point.
+
+Note: > * Only administrators can create a manual restore point.
+
+Each cloud PC can have only one manual restore point at a time.
+
+A manual restore point has an expiration date of approximately 28 days.
+
+Move cloud PC
+
+We can move a cloud PC in a policy by editing the provisioning policy.
+
+Cloud PCs can be moved:
+
+one Region to another Region
+
+one Azure network connection to another ANC.
+
+from ANC to Microsoft Hosted Network and vice versa.
+
+Moving cloud PCs doesn't result in reprovisioning.
+
+Moving a cloud PC to a new Region or ANC, deletes the restore points in the old Region or ANC and are no longer accessible.
+
+Reprovision a cloud PC
+
+The Reprovision remote action deletes a user's current cloud PC and creates a brand new cloud PC for the same user.
+
+The original cloud PC is deleted, including all user data, applications, customizations and so on.
+
+To reprovision a cloud PC, it must have a status of failed or provisioned in the W365 provisioning node.
